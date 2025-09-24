@@ -96,30 +96,36 @@
           </n-popover>
         </n-flex>
         <!-- 总结 -->
-        <n-flex class="summary" justify="space-between">
-          <n-text class="date" depth="3">
-            {{ formatTime(site?.days?.[0]?.date || 0) }}
-          </n-text>
-          <n-text v-if="site?.down?.times" depth="3">
-            {{
-              $t("card.summaryData", {
-                days: site?.days?.length,
-                times: site?.down?.times,
-                duration: formatDuration(site?.down?.duration),
-                percent: site?.percent,
-              })
-            }}
-          </n-text>
-          <n-text v-else depth="3">
-            {{
-              $t("card.summary", {
-                days: site?.days?.length,
-                percent: site?.percent,
-              })
-            }}
-          </n-text>
-          <n-text class="date" depth="3">{{ $t("meta.today") }}</n-text>
-        </n-flex>
+        <div class="summary">
+          <!-- 日期行 - 桌面和移动端都显示 -->
+          <n-flex class="date-row" justify="space-between">
+            <n-text class="date" depth="3">
+              {{ formatTime(site?.days?.[0]?.date || 0) }}
+            </n-text>
+            <n-text class="date" depth="3">{{ $t("meta.today") }}</n-text>
+          </n-flex>
+          <!-- 可用性数据行 - 移动端独立显示 -->
+          <div class="availability-row">
+            <n-text v-if="site?.down?.times" depth="3">
+              {{
+                $t("card.summaryData", {
+                  days: site?.days?.length,
+                  times: site?.down?.times,
+                  duration: formatDuration(site?.down?.duration),
+                  percent: site?.percent,
+                })
+              }}
+            </n-text>
+            <n-text v-else depth="3">
+              {{
+                $t("card.summary", {
+                  days: site?.days?.length,
+                  percent: site?.percent,
+                })
+              }}
+            </n-text>
+          </div>
+        </div>
       </n-card>
     </div>
     <div
@@ -313,22 +319,26 @@ onMounted(getSiteData);
       }
     }
     .summary {
-      @media (max-width: 768px) {
-        flex-direction: column;
-        gap: 4px;
-        align-items: flex-start;
+      .date-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .availability-row {
+        display: flex;
+        justify-content: center;
+        @media (max-width: 768px) {
+          margin-top: 6px;
+        }
       }
       .date {
         width: 100px;
-        @media (max-width: 768px) {
-          width: auto;
-          text-align: left !important;
-        }
         &:last-child {
           text-align: right;
-          @media (max-width: 768px) {
-            text-align: left !important;
-          }
+        }
+        @media (max-width: 768px) {
+          width: auto;
+          font-size: 11px;
         }
       }
       .n-text {
@@ -336,6 +346,7 @@ onMounted(getSiteData);
         @media (max-width: 768px) {
           font-size: 11px;
           line-height: 1.4;
+          text-align: center;
         }
       }
     }

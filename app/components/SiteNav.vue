@@ -59,6 +59,9 @@
       </n-flex>
     </div>
   </nav>
+
+  <!-- About Modal -->
+  <AboutModal v-model="showAboutModal" />
 </template>
 
 <script setup lang="ts">
@@ -70,6 +73,9 @@ const { t } = useI18n();
 const colorMode = useColorMode();
 const config = useRuntimeConfig();
 const statusStore = useStatusStore();
+
+// About modal state
+const showAboutModal = ref(false);
 
 // 图标渲染
 const renderIcon = (icon: string) => () =>
@@ -89,6 +95,9 @@ const navMenu = computed<DropdownOption[]>(() => [
     key: "about",
     label: t("nav.about"),
     icon: renderIcon("icon:info"),
+    props: {
+      onClick: () => showAboutModal.value = true,
+    },
   },
   {
     key: "logout",
