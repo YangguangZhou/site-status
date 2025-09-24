@@ -167,16 +167,29 @@ header {
     max-width: 900px;
     margin: 0 auto;
     padding: 30px 20px 80px;
+    @media (max-width: 768px) {
+      padding: 20px 15px 60px;
+    }
     .site-status {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       padding: 0 20px;
       height: 100%;
+      @media (max-width: 768px) {
+        padding: 0 10px;
+        align-items: center;
+        justify-content: center;
+      }
       .status-text {
         display: flex;
         align-items: center;
         margin-bottom: 12px;
+        @media (max-width: 768px) {
+          flex-direction: column;
+          text-align: center;
+          margin-bottom: 0;
+        }
         .point {
           position: relative;
           width: 40px;
@@ -185,6 +198,13 @@ header {
           background-color: #fff;
           border-radius: 50%;
           margin-right: 30px;
+          @media (max-width: 768px) {
+            margin-right: 0;
+            margin-bottom: 15px;
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+          }
           &::after {
             content: "";
             background-color: #ffffff80;
@@ -206,13 +226,28 @@ header {
           .title {
             font-size: 40px;
             font-weight: bold;
+            @media (max-width: 768px) {
+              font-size: 28px;
+              white-space: nowrap;
+            }
+            @media (max-width: 480px) {
+              font-size: 24px;
+            }
           }
           .tip {
             font-size: 14px;
             opacity: 0.8;
+            @media (max-width: 768px) {
+              font-size: 12px;
+              margin-top: 8px;
+            }
             .n-button {
               --n-height: 22px;
               margin-left: 10px;
+              @media (max-width: 768px) {
+                --n-height: 18px;
+                margin-left: 5px;
+              }
             }
             span {
               &:first-child {
@@ -221,6 +256,9 @@ header {
                   font-size: 12px;
                   margin: 0 8px;
                   opacity: 0.6;
+                  @media (max-width: 768px) {
+                    margin: 0 4px;
+                  }
                 }
               }
             }

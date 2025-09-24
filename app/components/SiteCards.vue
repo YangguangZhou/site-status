@@ -205,27 +205,61 @@ onMounted(getSiteData);
   max-width: 900px;
   margin: 30px auto 20px;
   padding: 0 20px;
+  @media (max-width: 768px) {
+    margin: 20px auto 15px;
+    padding: 0 15px;
+    gap: 10px;
+  }
   .site-item {
     opacity: 0;
     border-radius: 12px;
     animation: float-up 0.5s forwards;
     overflow: hidden;
     .meta {
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .title {
+        @media (max-width: 768px) {
+          flex-wrap: wrap;
+          min-width: 0;
+        }
+      }
       .site-name {
         font-weight: bold;
+        @media (max-width: 768px) {
+          font-size: 14px;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .n-tag {
         --n-height: 20px;
         cursor: pointer;
+        @media (max-width: 768px) {
+          --n-height: 18px;
+          font-size: 11px;
+        }
       }
       .status {
+        @media (max-width: 768px) {
+          flex-shrink: 0;
+        }
         .n-text {
           color: var(--bg-color);
+          @media (max-width: 768px) {
+            font-size: 12px;
+          }
         }
         svg {
           font-size: 22px;
           margin-right: -4px;
           color: var(--bg-color);
+          @media (max-width: 768px) {
+            font-size: 18px;
+          }
         }
       }
       .point {
@@ -235,6 +269,11 @@ onMounted(getSiteData);
         min-width: 14px;
         background-color: var(--bg-color);
         border-radius: 50%;
+        @media (max-width: 768px) {
+          width: 12px;
+          height: 12px;
+          min-width: 12px;
+        }
         &::after {
           content: "";
           background-color: var(--bg-color);
@@ -253,6 +292,9 @@ onMounted(getSiteData);
     }
     .timeline {
       margin: 15px 0 10px;
+      @media (max-width: 768px) {
+        margin: 12px 0 8px;
+      }
       .day {
         height: 26px;
         flex: 1;
@@ -261,20 +303,40 @@ onMounted(getSiteData);
         transition: transform 0.3s;
         transform-origin: bottom;
         cursor: pointer;
+        @media (max-width: 768px) {
+          height: 20px;
+          border-radius: 15px;
+        }
         &:hover {
           transform: scale(1.1);
         }
       }
     }
     .summary {
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+      }
       .date {
         width: 100px;
+        @media (max-width: 768px) {
+          width: auto;
+          text-align: left !important;
+        }
         &:last-child {
           text-align: right;
+          @media (max-width: 768px) {
+            text-align: left !important;
+          }
         }
       }
       .n-text {
         font-size: 13px;
+        @media (max-width: 768px) {
+          font-size: 11px;
+          line-height: 1.4;
+        }
       }
     }
   }

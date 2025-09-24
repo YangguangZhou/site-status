@@ -156,13 +156,19 @@ nav {
     margin: 0 auto;
     padding: 30px 20px;
     transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @media (max-width: 768px) {
+      padding: 20px 15px;
+    }
   }
   .logo {
     font-size: 20px;
     font-weight: bold;
     transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    @media (max-width: 512px) {
+    @media (max-width: 768px) {
       font-size: 16px;
+    }
+    @media (max-width: 480px) {
+      font-size: 14px;
     }
   }
   &.scroll {
@@ -171,6 +177,9 @@ nav {
     box-shadow: 0px 0px 8px 4px var(--main-box-shadow);
     .nav-content {
       padding: 12px 20px;
+      @media (max-width: 768px) {
+        padding: 10px 15px;
+      }
     }
   }
 }
