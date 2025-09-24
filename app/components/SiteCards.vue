@@ -96,30 +96,36 @@
           </n-popover>
         </n-flex>
         <!-- 总结 -->
-        <n-flex class="summary" justify="space-between">
-          <n-text class="date" depth="3">
-            {{ formatTime(site?.days?.[0]?.date || 0) }}
-          </n-text>
-          <n-text v-if="site?.down?.times" depth="3">
-            {{
-              $t("card.summaryData", {
-                days: site?.days?.length,
-                times: site?.down?.times,
-                duration: formatDuration(site?.down?.duration),
-                percent: site?.percent,
-              })
-            }}
-          </n-text>
-          <n-text v-else depth="3">
-            {{
-              $t("card.summary", {
-                days: site?.days?.length,
-                percent: site?.percent,
-              })
-            }}
-          </n-text>
-          <n-text class="date" depth="3">{{ $t("meta.today") }}</n-text>
-        </n-flex>
+        <div class="summary">
+          <!-- 日期行 - 桌面和移动端都显示 -->
+          <n-flex class="date-row" justify="space-between">
+            <n-text class="date" depth="3">
+              {{ formatTime(site?.days?.[0]?.date || 0) }}
+            </n-text>
+            <n-text class="date" depth="3">{{ $t("meta.today") }}</n-text>
+          </n-flex>
+          <!-- 可用性数据行 - 移动端独立显示 -->
+          <div class="availability-row">
+            <n-text v-if="site?.down?.times" depth="3">
+              {{
+                $t("card.summaryData", {
+                  days: site?.days?.length,
+                  times: site?.down?.times,
+                  duration: formatDuration(site?.down?.duration),
+                  percent: site?.percent,
+                })
+              }}
+            </n-text>
+            <n-text v-else depth="3">
+              {{
+                $t("card.summary", {
+                  days: site?.days?.length,
+                  percent: site?.percent,
+                })
+              }}
+            </n-text>
+          </div>
+        </div>
       </n-card>
     </div>
     <div
@@ -205,27 +211,61 @@ onMounted(getSiteData);
   max-width: 900px;
   margin: 30px auto 20px;
   padding: 0 20px;
+  @media (max-width: 768px) {
+    margin: 20px auto 15px;
+    padding: 0 15px;
+    gap: 10px;
+  }
   .site-item {
     opacity: 0;
     border-radius: 12px;
     animation: float-up 0.5s forwards;
     overflow: hidden;
     .meta {
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .title {
+        @media (max-width: 768px) {
+          flex-wrap: wrap;
+          min-width: 0;
+        }
+      }
       .site-name {
         font-weight: bold;
+        @media (max-width: 768px) {
+          font-size: 14px;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       .n-tag {
         --n-height: 20px;
         cursor: pointer;
+        @media (max-width: 768px) {
+          --n-height: 18px;
+          font-size: 11px;
+        }
       }
       .status {
+        @media (max-width: 768px) {
+          flex-shrink: 0;
+        }
         .n-text {
           color: var(--bg-color);
+          @media (max-width: 768px) {
+            font-size: 12px;
+          }
         }
         svg {
           font-size: 22px;
           margin-right: -4px;
           color: var(--bg-color);
+          @media (max-width: 768px) {
+            font-size: 18px;
+          }
         }
       }
       .point {
@@ -235,6 +275,11 @@ onMounted(getSiteData);
         min-width: 14px;
         background-color: var(--bg-color);
         border-radius: 50%;
+        @media (max-width: 768px) {
+          width: 12px;
+          height: 12px;
+          min-width: 12px;
+        }
         &::after {
           content: "";
           background-color: var(--bg-color);
@@ -253,6 +298,9 @@ onMounted(getSiteData);
     }
     .timeline {
       margin: 15px 0 10px;
+      @media (max-width: 768px) {
+        margin: 12px 0 8px;
+      }
       .day {
         height: 26px;
         flex: 1;
@@ -261,20 +309,45 @@ onMounted(getSiteData);
         transition: transform 0.3s;
         transform-origin: bottom;
         cursor: pointer;
+        @media (max-width: 768px) {
+          height: 20px;
+          border-radius: 15px;
+        }
         &:hover {
           transform: scale(1.1);
         }
       }
     }
     .summary {
+      .date-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .availability-row {
+        display: flex;
+        justify-content: center;
+        @media (max-width: 768px) {
+          margin-top: 6px;
+        }
+      }
       .date {
         width: 100px;
         &:last-child {
           text-align: right;
         }
+        @media (max-width: 768px) {
+          width: auto;
+          font-size: 11px;
+        }
       }
       .n-text {
         font-size: 13px;
+        @media (max-width: 768px) {
+          font-size: 11px;
+          line-height: 1.4;
+          text-align: center;
+        }
       }
     }
   }

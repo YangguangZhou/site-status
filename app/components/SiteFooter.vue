@@ -31,8 +31,8 @@
         {{ $t("footer.fiveMinutes") }}
       </n-p>
       <n-p depth="3">
-        Copyright &copy; 2020 - {{ new Date().getFullYear() }}
-        <n-text depth="3" @click="jumpLink(linkData.home)"> IMSYY </n-text>
+        Copyright &copy; 2023 - 2025
+        <n-text depth="3" @click="jumpLink(linkData.home)"> Jerry Zhou </n-text>
         <n-text
           v-if="siteIcp"
           depth="3"
@@ -64,13 +64,23 @@ footer {
   padding: 60px 20px 90px;
   margin-top: auto;
   z-index: 100;
+  @media (max-width: 768px) {
+    padding: 40px 15px 60px;
+  }
   .text {
     margin-top: 12px;
+    @media (max-width: 768px) {
+      text-align: center;
+    }
     .n-p,
     .n-text {
       margin: 0;
       font-size: 13px;
       line-height: 26px;
+      @media (max-width: 768px) {
+        font-size: 11px;
+        line-height: 20px;
+      }
     }
     .n-text {
       font-weight: bold;

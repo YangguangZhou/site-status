@@ -59,6 +59,9 @@
       </n-flex>
     </div>
   </nav>
+
+  <!-- About Modal -->
+  <AboutModal v-model="showAboutModal" />
 </template>
 
 <script setup lang="ts">
@@ -70,6 +73,9 @@ const { t } = useI18n();
 const colorMode = useColorMode();
 const config = useRuntimeConfig();
 const statusStore = useStatusStore();
+
+// About modal state
+const showAboutModal = ref(false);
 
 // 图标渲染
 const renderIcon = (icon: string) => () =>
@@ -89,6 +95,9 @@ const navMenu = computed<DropdownOption[]>(() => [
     key: "about",
     label: t("nav.about"),
     icon: renderIcon("icon:info"),
+    props: {
+      onClick: () => showAboutModal.value = true,
+    },
   },
   {
     key: "logout",
@@ -156,13 +165,19 @@ nav {
     margin: 0 auto;
     padding: 30px 20px;
     transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    @media (max-width: 768px) {
+      padding: 20px 15px;
+    }
   }
   .logo {
     font-size: 20px;
     font-weight: bold;
     transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    @media (max-width: 512px) {
+    @media (max-width: 768px) {
       font-size: 16px;
+    }
+    @media (max-width: 480px) {
+      font-size: 14px;
     }
   }
   &.scroll {
@@ -171,6 +186,9 @@ nav {
     box-shadow: 0px 0px 8px 4px var(--main-box-shadow);
     .nav-content {
       padding: 12px 20px;
+      @media (max-width: 768px) {
+        padding: 10px 15px;
+      }
     }
   }
 }
